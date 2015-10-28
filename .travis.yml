@@ -9,4 +9,4 @@ script:
 bundler_args: --without production
 addons:
   code_climate:
-    repo_token: 
+    repo_token: 5c0181ffd758ef1cc82df0d50829eeeedd5282c0670478fb7f6b6eb4b8645a4f
