@@ -3,6 +3,7 @@ rvm:
   - 2.2.3
 before_script:
   - rake db:drop
+  - rake db:migrate
   - rake db:setup
 script:
   - rspec spec
