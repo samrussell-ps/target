@@ -1,7 +1,20 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# wordlist obtained from http://www-01.sil.org/linguistics/wordlists/english/wordlist/wordsEn.txt
+wordlist_path = File.join(Rails.root, 'db', 'resources', 'wordlist.txt')
+
+wordlist = File.read(wordlist_path)
+
+words = wordlist.split("\r\n")
+
+words_to_load = words.shuffle
+
+valid_words_to_load = words_to_load.select { |word| word.match(/\A[A-Za-z]+\z/).present? }
+
+word_arguments = valid_words_to_load.map { |word| { word: word.upcase } }
+
+ActiveRecord::Base.transaction do
+  DictionaryEntry.destroy_all
+
+  DictionaryEntry.create!(word_arguments)
+end
+
+
