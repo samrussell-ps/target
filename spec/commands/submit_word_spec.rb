@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SubmitWord do
-  let(:dictionary_entry) { DictionaryEntry.order("RANDOM()").first }
+  let(:dictionary_entry) { DictionaryEntry.find_by_word!("DEVELOPER") }
   let(:params) { { dictionary_entry: dictionary_entry, word_shuffle_seed: 234 } }
   let(:board) { Board.create!(params) }
   let(:word_to_submit) { nil }
@@ -10,8 +10,8 @@ RSpec.describe SubmitWord do
   describe '#call' do
     subject(:call) { submit_word.call }
 
-    context 'with word "bucket", no words submitted' do
-      let(:word_to_submit) { 'bucket' }
+    context 'with word "peel"' do
+      let(:word_to_submit) { 'peel' }
 
       it { is_expected.to be true }
 
@@ -24,8 +24,8 @@ RSpec.describe SubmitWord do
       end
     end
 
-    context 'word "zxcvbnnm"' do
-      let(:word_to_submit) { 'zxcvbnnm' }
+    context 'word "prlv"' do
+      let(:word_to_submit) { 'prlv' }
 
       it { is_expected.to be false }
 
@@ -33,8 +33,22 @@ RSpec.describe SubmitWord do
         expect { submit_word.call }.to_not change { board.submitted_words.size }
       end
 
-      it 'sets "word is invalid" error' do
-        expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_is_invalid]])
+      it 'sets "word is not in dictionary" error' do
+        expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_is_not_in_dictionary]])
+      end
+    end
+
+    context 'word "bucket"' do
+      let(:word_to_submit) { 'bucket' }
+
+      it { is_expected.to be false }
+
+      it 'does not create a new SubmittedWord' do
+        expect { submit_word.call }.to_not change { board.submitted_words.size }
+      end
+
+      it 'sets "word is not in grid" error' do
+        expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_is_not_in_grid]])
       end
     end
   end
