@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   
   resources :board, only: [:create, :show, :index] do
-  #  resources :submitted_word, only: [:create]
+    resources :submitted_word, only: [:create]
   end
 
   # You can have the root of your site routed with "root"
