@@ -5,6 +5,9 @@ class BoardController < ApplicationController
   def show
   end
 
-  def new
+  def create
+    new_board = CreateBoard.new.call
+
+    redirect_to new_board
   end
 end

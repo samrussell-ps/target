@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   
-  resources :board, only: [:new, :show, :index] do
+  resources :board, only: [:create, :show, :index] do
   #  resources :submitted_word, only: [:create]
   end
 
