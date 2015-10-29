@@ -22,4 +22,12 @@ RSpec.describe DictionaryEntry, type: :model do
     expect(DictionaryEntry.create(word: '234')).to_not be_valid
     expect(DictionaryEntry.create(word: '%!')).to_not be_valid
   end
+
+  describe '#random' do
+    it 'returns a randomly-chosen DictionaryEntry' do
+      sample_entries = 10.times.map { DictionaryEntry.random }
+
+      expect(sample_entries.uniq.size).to be > 8
+    end
+  end
 end

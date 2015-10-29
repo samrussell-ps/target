@@ -6,4 +6,8 @@ class DictionaryEntry < ActiveRecord::Base
     with: /\A[A-Z]+\z/,
       message: "must be an uppercase string"
   }
+
+  def self.random
+    order("RANDOM()").first
+  end
 end
