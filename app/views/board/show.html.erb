@@ -4,7 +4,20 @@
   </div>
 <% end %>
 
-<p>Board: <%= @board.dictionary_entry.word %></p>
+<% shuffled_word = @board.dictionary_entry.word.chars.shuffle(random: Random.new(@board.word_shuffle_seed)).join %>
+
+<table>
+<% shuffled_word.chars.each_slice(3) do |row| %>
+  <tr>
+    <% row.each do |cell| %>
+      <td><%= cell %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<p>Score: <%= @board.submitted_words.size %>/<%= @max_score %>
+
 <p>Words</p>
 <div>
   <ol>

@@ -1,6 +1,7 @@
 class BoardController < ApplicationController
   def show
     @board = Board.find(board_id)
+    @max_score = ValidWords.new(@board).call.size
   end
 
   def index
