@@ -6,4 +6,8 @@ class Board < ActiveRecord::Base
   validates :word_shuffle_seed, numericality: {
     only_integer: true
   }
+
+  def valid_words
+    ValidWords.new(self).call
+  end
 end

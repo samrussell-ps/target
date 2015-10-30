@@ -1,0 +1,9 @@
+<h1>Boards</h1>
+
+<table>
+  <% @boards.each do |board| %>
+    <tr>
+      <td><%= link_to "Board #{board.id}", board %></td>
+    </tr>
+  <% end %>
+</table>

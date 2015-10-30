@@ -1,0 +1,20 @@
+<% if flash[:alert] %>
+  <div class='alert alert-danger'>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<p>Board: <%= @board.dictionary_entry.word %></p>
+<p>Words</p>
+<div>
+  <ol>
+    <% @board.submitted_words.map { |submitted_word| submitted_word.dictionary_entry.word }.each do |word| %>
+      <li><%= word %></li>
+      <% end %>
+    </ol>
+  </div>
+
+  <%= form_tag({controller: 'submitted_word', action: 'create', board_id: @board.id}, method: 'post', remote: false) do %>
+    <%= text_field_tag 'word', '', { autofocus: true } %>
+    <%= submit_tag 'Submit word' %>
+  <% end %>
