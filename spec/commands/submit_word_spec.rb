@@ -24,6 +24,24 @@ RSpec.describe SubmitWord do
       end
     end
 
+    context 'with word "peel", a second time' do
+      let(:word_to_submit) { 'peel' }
+
+      before do
+        SubmitWord.new(board, word_to_submit).call
+      end
+
+      it { is_expected.to be false }
+
+      it 'does not create a new SubmittedWord' do
+        expect { submit_word.call }.to_not change { board.submitted_words.size }
+      end
+
+      it 'sets "word has been submitted error' do
+        expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_has_been_submitted]])
+      end
+    end
+
     context 'word "prlv"' do
       let(:word_to_submit) { 'prlv' }
 
