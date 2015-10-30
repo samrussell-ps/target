@@ -1,3 +1,107 @@
 // Place all the styles related to the board controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#grid {
+  font: 71%/1.5 Verdana, Sans-Serif;
+  font-size: 6vmin;
+  background: #eee;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  width:100%;
+}
+
+@media (orientation: landscape) {
+  #grid {
+    height:48%
+  }
+}
+
+@media (orientation: portrait) {
+  #grid {
+    height:24%
+  }
+}
+
+//#keyboard {
+//  margin: 0;
+//  padding: 0;
+//  list-style: none;
+//  height: 100%;
+//}
+
+.letter-cell {
+  display: table;
+  height: 40px;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  float: left;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  width: 9%;
+  background: #fff;
+  border: 1px solid #f9f9f9;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.letter-cell span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.topfiller {
+    height: 2px;
+}
+.leftfiller-0 {
+  clear: both;
+  float: left;
+  margin-left: 0px;
+  width: 0px;
+}
+.leftfiller-5 {
+  clear: both;
+  float: left;
+  margin: 0 0.5% 5px 0;
+  width: 4.5%;
+}
+.leftfiller-10 {
+  clear: both;
+  float: left;
+  margin: 0 1% 5px 0;
+  width: 9%;
+}
+.rightfiller {
+  height: 44px;
+}
+.filler {
+  width: 5%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (orientation: landscape) {
+  .letter-cell {
+    height:30%;
+    margin-top:0.3%;
+  }
+  .rightfiller {
+      height:30%;
+  }
+  .topfiller-2 {
+      height: 1%;
+  }
+}
+
+@media (orientation: portrait) {
+  .letter-cell {
+    height:30%;
+    margin-top:0.5%;
+  }
+  .rightfiller {
+    height:30%;
+  }
+  .topfiller-2 {
+    height: 1%;
+  }
+}
