@@ -7,18 +7,19 @@
   background: #eee;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  width:100%;
+  width: 30vmin;
+  height: 30vmin;
 }
 
 @media (orientation: landscape) {
   #grid {
-    height:48%
+    //height:48%
   }
 }
 
 @media (orientation: portrait) {
   #grid {
-    height:24%
+    //height:24%
   }
 }
 
@@ -31,7 +32,6 @@
 
 .letter-cell {
   display: table;
-  height: 40px;
   line-height: 1;
   text-align: center;
   vertical-align: middle;
@@ -40,7 +40,8 @@
   margin-right: 0.5%;
   margin-top: 0.5%;
   margin-bottom: 0.5%;
-  width: 9%;
+  height: 30%;
+  width: 30%;
   background: #fff;
   border: 1px solid #f9f9f9;
   -moz-border-radius: 5px;
@@ -73,6 +74,7 @@
 }
 .rightfiller {
   height: 44px;
+  width: 9vmin;
 }
 .filler {
   width: 5%;
@@ -82,26 +84,26 @@
 
 @media (orientation: landscape) {
   .letter-cell {
-    height:30%;
-    margin-top:0.3%;
+    //height: 15vmin;
+    //margin-top:0.3%;
   }
   .rightfiller {
-      height:30%;
+      //height: 15vmin;
   }
   .topfiller-2 {
-      height: 1%;
+      //height: 0.5vmin;
   }
 }
 
 @media (orientation: portrait) {
   .letter-cell {
-    height:30%;
-    margin-top:0.5%;
+    //height: 15vmin;
+    //margin-top:0.5%;
   }
   .rightfiller {
-    height:30%;
+    //height: 15vmin;
   }
   .topfiller-2 {
-    height: 1%;
+    //height: 0.5vmin;
   }
 }

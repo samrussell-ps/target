@@ -8,20 +8,19 @@
 
 <div id="grid">
 <% shuffled_word.chars.each_slice(3) do |row| %>
-  <div class="row"> 
     <div class="leftfiller-0"></div>
     <% row.each do |cell| %>
       <div class="letter-cell"><%= cell %></div>
     <% end %>
     <div class="rightfiller"></div>
-  </div>
 <% end %>
 </div>
-
+<div>
   <%= form_tag({controller: 'submitted_word', action: 'create', board_id: @board.id}, method: 'post', remote: false) do %>
     <%= text_field_tag 'word', '', { autofocus: true } %>
     <%= submit_tag 'Submit word' %>
   <% end %>
+</div>
 
 <p>Score: <%= @board.submitted_words.size %>/<%= @max_score %>
 
