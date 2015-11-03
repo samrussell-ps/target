@@ -5,7 +5,7 @@ RSpec.describe SubmitWord do
   let(:params) { { dictionary_entry: dictionary_entry,
                    word_shuffle_seed: 234,
                    maximum_score: 1,
-                   centre_letter_offset: 1} }
+                   centre_letter_offset: 6} }
   let(:board) { Board.create!(params) }
   let(:word_to_submit) { nil }
   let(:submit_word) { SubmitWord.new(board, word_to_submit) }
@@ -42,6 +42,20 @@ RSpec.describe SubmitWord do
 
       it 'sets "word has been submitted error' do
         expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_has_been_submitted]])
+      end
+    end
+
+    context 'word role (does not use centre letter)' do
+      let(:word_to_submit) { 'role' }
+
+      it { is_expected.to be false }
+
+      it 'does not create a new SubmittedWord' do
+        expect { submit_word.call }.to_not change { board.submitted_words.size }
+      end
+
+      it 'sets "word does not use centre letter" error' do
+        expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_does_not_use_centre_letter]])
       end
     end
 

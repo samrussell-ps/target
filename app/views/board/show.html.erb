@@ -4,10 +4,14 @@
   </div>
 <% end %>
 
-<% shuffled_word = @board.dictionary_entry.word.chars.shuffle(random: Random.new(@board.word_shuffle_seed)).join %>
+<% word = @board.dictionary_entry.word %>
+<% centre_letter = word[@board.centre_letter_offset] %>
+<% other_letters = word[0...@board.centre_letter_offset] + word[@board.centre_letter_offset+1..-1] %>
+<% shuffled_letters = word.chars.shuffle(random: Random.new(@board.word_shuffle_seed)) %>
+<% grid_letters = shuffled_letters[0..3] + [centre_letter] + shuffled_letters[5..8] %>
 
 <div id="grid">
-<% shuffled_word.chars.each_slice(3) do |row| %>
+<% grid_letters.each_slice(3) do |row| %>
     <div class="leftfiller-0"></div>
     <% row.each do |cell| %>
       <div class="letter-cell"><%= cell %></div>
