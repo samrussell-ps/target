@@ -70,6 +70,7 @@ class SubmitWord
     end
   end
 
+  # TODO set is wrong, add or even just error() could be
   def set_error(symbol)
     @errors << ERROR_MESSAGES[symbol]
   end

@@ -6,8 +6,11 @@ class Board < ActiveRecord::Base
   validates :word_shuffle_seed, numericality: {
     only_integer: true
   }
+  validates :maximum_score, numericality: {
+    only_integer: true
+  }
 
   def valid_words
-    ValidWords.new(self).call
+    ValidWords.new(dictionary_entry.word).call
   end
 end

@@ -26,6 +26,7 @@ class SubmittedWordController < ApplicationController
   end
 
   def set_errors
+    # TODO replace .first with .join('\n')
     flash[:alert] = word_submitter.errors.first unless word_submitter.errors.empty?
   end
 

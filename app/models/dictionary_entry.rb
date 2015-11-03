@@ -7,6 +7,7 @@ class DictionaryEntry < ActiveRecord::Base
       message: "must be an uppercase string"
   }
 
+  # TODO this name is wrong now
   def self.random
     where("length(word) = 9").order("RANDOM()").first
   end

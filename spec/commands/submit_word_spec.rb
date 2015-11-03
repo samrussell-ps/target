@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe SubmitWord do
   let(:dictionary_entry) { DictionaryEntry.find_by_word!("DEVELOPER") }
-  let(:params) { { dictionary_entry: dictionary_entry, word_shuffle_seed: 234 } }
+  let(:params) { { dictionary_entry: dictionary_entry,
+                   word_shuffle_seed: 234,
+                   maximum_score: 1} }
   let(:board) { Board.create!(params) }
   let(:word_to_submit) { nil }
   let(:submit_word) { SubmitWord.new(board, word_to_submit) }

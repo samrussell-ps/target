@@ -1,9 +1,10 @@
 class ValidWords
-  def initialize(board)
-    @board = board
+  def initialize(seed_word)
+    @seed_word = seed_word
   end
 
   def call
+    # TODO optimise - select loads this all into memory
     DictionaryEntry.select { |dictionary_entry| is_word_in_grid?(dictionary_entry.word) }
   end
 
@@ -17,7 +18,7 @@ class ValidWords
 
   # TODO dedup
   def grid_character_frequency
-    @board.dictionary_entry.word.chars.each_with_object(Hash.new(0)) do |char, counts|
+    @seed_word.chars.each_with_object(Hash.new(0)) do |char, counts|
       counts[char] += 1
     end
   end
