@@ -9,4 +9,10 @@ class Board < ActiveRecord::Base
   validates :maximum_score, numericality: {
     only_integer: true
   }
+  validates :centre_letter_offset, numericality: {
+    only_integer: true
+  }
+  validates :centre_letter_offset, inclusion: {
+    in: (0...9)
+  }
 end
