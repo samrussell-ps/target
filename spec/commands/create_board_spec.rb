@@ -12,6 +12,6 @@ describe CreateBoard do
 
   it 'sets maximum_score to the number of valid words' do
     board = CreateBoard.new.call
-    expect(board.maximum_score).to eq(board.valid_words.size)
+    expect(board.maximum_score).to eq(ValidWords.new(board.dictionary_entry.word).call.size)
   end
 end

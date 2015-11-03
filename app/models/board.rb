@@ -9,8 +9,4 @@ class Board < ActiveRecord::Base
   validates :maximum_score, numericality: {
     only_integer: true
   }
-
-  def valid_words
-    ValidWords.new(dictionary_entry.word).call
-  end
 end
