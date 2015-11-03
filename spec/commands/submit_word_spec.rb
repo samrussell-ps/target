@@ -13,6 +13,7 @@ RSpec.describe SubmitWord do
   describe '#call' do
     subject(:call) { submit_word.call }
 
+    #TODO stub WordValidator
     context 'with word "peel"' do
       let(:word_to_submit) { 'peel' }
 
