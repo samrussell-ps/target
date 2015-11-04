@@ -45,15 +45,16 @@ class WordValidator
     end
   end
 
-  # TODO dedup
   def grid_character_frequency
-    @board.dictionary_entry.word.chars.each_with_object(Hash.new(0)) do |char, counts|
-      counts[char] += 1
-    end
+    character_frequency(@board.dictionary_entry.word)
   end
 
   def word_character_frequency
-    word_to_submit.chars.each_with_object(Hash.new(0)) do |char, counts|
+    character_frequency(word_to_submit)
+  end
+
+  def character_frequency(word)
+    word.chars.each_with_object(Hash.new(0)) do |char, counts|
       counts[char] += 1
     end
   end

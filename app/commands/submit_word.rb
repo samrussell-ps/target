@@ -44,11 +44,11 @@ class SubmitWord
 
   def find_errors
     if dictionary_entry.nil?
-      set_error(:word_is_not_in_dictionary)
+      error(:word_is_not_in_dictionary)
     elsif is_word_invalid?
-      set_error(word_validator.errors.first)
+      word_validator.errors.each { |symbol| error(symbol) }
     elsif has_word_been_submitted?
-      set_error(:word_has_been_submitted)
+      error(:word_has_been_submitted)
     end
 
     return @errors.present?
@@ -62,8 +62,7 @@ class SubmitWord
     board.submitted_words.any? { |submitted_word| submitted_word.dictionary_entry.word == word_to_submit }
   end
 
-  # TODO set is wrong, add or even just error() could be
-  def set_error(symbol)
+  def error(symbol)
     @errors << ERROR_MESSAGES[symbol]
   end
 end
