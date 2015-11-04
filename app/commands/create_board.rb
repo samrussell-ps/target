@@ -11,7 +11,7 @@ class CreateBoard
 
     board.maximum_score = ValidWords.new(board).call.size
 
-    board.save
+    board.save!
 
     board
   end
