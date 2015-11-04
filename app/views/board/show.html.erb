@@ -7,8 +7,8 @@
 <% word = @board.dictionary_entry.word %>
 <% centre_letter = word[@board.centre_letter_offset] %>
 <% other_letters = word[0...@board.centre_letter_offset] + word[@board.centre_letter_offset+1..-1] %>
-<% shuffled_letters = word.chars.shuffle(random: Random.new(@board.word_shuffle_seed)) %>
-<% grid_letters = shuffled_letters[0..3] + [centre_letter] + shuffled_letters[5..8] %>
+<% shuffled_letters = other_letters.chars.shuffle(random: Random.new(@board.word_shuffle_seed)) %>
+<% grid_letters = shuffled_letters[0..3] + [centre_letter] + shuffled_letters[4..7] %>
 
 <div id="grid">
 <% grid_letters.each_slice(3) do |row| %>
