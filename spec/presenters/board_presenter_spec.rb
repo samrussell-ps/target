@@ -72,4 +72,12 @@ describe BoardPresenter do
       expect(board_presenter.maximum_score).to eq(maximum_score)
     end
   end
+
+  describe '#id' do
+    it 'returns board id' do
+      expect(mock_board).to receive(:id).and_return(1337)
+
+      expect(board_presenter.id).to eq(1337)
+    end
+  end
 end

@@ -31,15 +31,11 @@ class SubmitWord
   end
 
   def word_validator
-    @word_validator ||= WordValidator.new(board, dictionary_entry)
-  end
-
-  def board
-    @board
+    @word_validator ||= WordValidator.new(@board, dictionary_entry)
   end
 
   def submit_word
-    board.submitted_words.create!(dictionary_entry: dictionary_entry) unless find_errors
+    @board.submitted_words.create!(dictionary_entry: dictionary_entry) unless find_errors
   end
 
   def find_errors
@@ -59,7 +55,7 @@ class SubmitWord
   end
 
   def has_word_been_submitted?
-    board.submitted_words.any? { |submitted_word| submitted_word.dictionary_entry.word == word_to_submit }
+    @board.submitted_words.any? { |submitted_word| submitted_word.dictionary_entry.word == word_to_submit }
   end
 
   def error(symbol)

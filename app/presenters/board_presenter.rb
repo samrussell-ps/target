@@ -25,4 +25,8 @@ class BoardPresenter
   def maximum_score
     @board.maximum_score
   end
+
+  def id
+    @board.id
+  end
 end

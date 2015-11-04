@@ -22,13 +22,13 @@
     <div class="rightfiller"></div>
 </div>
 <div>
-  <%= form_tag({controller: 'submitted_word', action: 'create', board_id: @board.id}, method: 'post', remote: false) do %>
+  <%= form_tag({controller: 'submitted_word', action: 'create', board_id: @board_presenter.id}, method: 'post', remote: false) do %>
     <%= text_field_tag 'word', '', { autofocus: true } %>
     <%= submit_tag 'Submit word' %>
   <% end %>
 </div>
 
-<p>Score: <%= @board.submitted_words.size %>/<%= @board.maximum_score %>
+<p>Score: <%= @board_presenter.score%>/<%= @board_presenter.maximum_score %>
 
 <p>Words</p>
 <div>
