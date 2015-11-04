@@ -1,7 +1,7 @@
 class BoardController < ApplicationController
   def show
     @board = Board.find(board_id)
-    @max_score = @board.maximum_score
+    @board_presenter = BoardPresenter.new(@board)
   end
 
   def index

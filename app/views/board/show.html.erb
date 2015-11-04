@@ -4,20 +4,22 @@
   </div>
 <% end %>
 
-<% word = @board.dictionary_entry.word %>
-<% centre_letter = word[@board.centre_letter_offset] %>
-<% other_letters = word[0...@board.centre_letter_offset] + word[@board.centre_letter_offset+1..-1] %>
-<% shuffled_letters = other_letters.chars.shuffle(random: Random.new(@board.word_shuffle_seed)) %>
-<% grid_letters = shuffled_letters[0..3] + [centre_letter] + shuffled_letters[4..7] %>
-
 <div id="grid">
-<% grid_letters.each_slice(3) do |row| %>
     <div class="leftfiller-0"></div>
-    <% row.each do |cell| %>
-      <div class="letter-cell"><%= cell %></div>
-    <% end %>
+    <div class="letter-cell"><%= @board_presenter.grid[0][0] %></div>
+    <div class="letter-cell"><%= @board_presenter.grid[0][1] %></div>
+    <div class="letter-cell"><%= @board_presenter.grid[0][2] %></div>
     <div class="rightfiller"></div>
-<% end %>
+    <div class="leftfiller-0"></div>
+    <div class="letter-cell"><%= @board_presenter.grid[1][0] %></div>
+    <div class="letter-cell centre-letter"><%= @board_presenter.grid[1][1] %></div>
+    <div class="letter-cell"><%= @board_presenter.grid[1][2] %></div>
+    <div class="rightfiller"></div>
+    <div class="leftfiller-0"></div>
+    <div class="letter-cell"><%= @board_presenter.grid[2][0] %></div>
+    <div class="letter-cell"><%= @board_presenter.grid[2][1] %></div>
+    <div class="letter-cell"><%= @board_presenter.grid[2][2] %></div>
+    <div class="rightfiller"></div>
 </div>
 <div>
   <%= form_tag({controller: 'submitted_word', action: 'create', board_id: @board.id}, method: 'post', remote: false) do %>
@@ -26,12 +28,12 @@
   <% end %>
 </div>
 
-<p>Score: <%= @board.submitted_words.size %>/<%= @max_score %>
+<p>Score: <%= @board.submitted_words.size %>/<%= @board.maximum_score %>
 
 <p>Words</p>
 <div>
   <ol>
-    <% @board.submitted_words.map { |submitted_word| submitted_word.dictionary_entry.word }.each do |word| %>
+    <% @board_presenter.words.each do |word| %>
       <li><%= word %></li>
     <% end %>
   </ol>
