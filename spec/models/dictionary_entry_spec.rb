@@ -23,15 +23,15 @@ RSpec.describe DictionaryEntry, type: :model do
     expect(DictionaryEntry.create(word: '%!')).to_not be_valid
   end
 
-  describe '#random' do
+  describe '#seed_word' do
     it 'returns a randomly-chosen DictionaryEntry' do
-      sample_entries = 10.times.map { DictionaryEntry.random }
+      sample_entries = 10.times.map { DictionaryEntry.seed_word }
 
       expect(sample_entries.uniq.size).to be > 8
     end
 
     it 'returns a DictionaryEntry with a 9 letter word' do
-      sample_entries = 10.times.map { DictionaryEntry.random.word.length }
+      sample_entries = 10.times.map { DictionaryEntry.seed_word.word.length }
 
       expect(sample_entries).to eq( 10.times.map { 9 } )
     end

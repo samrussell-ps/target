@@ -2,7 +2,7 @@ class CreateBoard
   NUMBER_OF_RANDOM_SEEDS = 10000
 
   def call
-    dictionary_entry = DictionaryEntry.random
+    dictionary_entry = DictionaryEntry.seed_word
 
     board = Board.create!(dictionary_entry: dictionary_entry,
                   word_shuffle_seed: rand(NUMBER_OF_RANDOM_SEEDS),

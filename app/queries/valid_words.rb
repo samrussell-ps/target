@@ -4,8 +4,9 @@ class ValidWords
   end
 
   def call
-    # TODO optimise - select loads this all into memory
-    DictionaryEntry.select { |dictionary_entry| is_word_valid?(dictionary_entry) }
+    DictionaryEntry.find_in_batches(batch_size: 1000).each_with_object([]) do |batch, output|
+      output.concat batch.select { |dictionary_entry| is_word_valid?(dictionary_entry) }
+    end
   end
 
   private
