@@ -8,11 +8,12 @@ describe WordValidator do
                    centre_letter_offset: 6} }
   let(:board) { Board.create!(params) }
   let(:word_to_submit) { nil }
-  let(:word_validator) { WordValidator.new(board, word_to_submit) }
+  let(:dictionary_entry_to_submit) { DictionaryEntry.find_by_word(word_to_submit) }
+  let(:word_validator) { WordValidator.new(board, dictionary_entry_to_submit) }
   subject(:call) { word_validator.call }
 
-  context 'with word "peel"' do
-    let(:word_to_submit) { 'peel' }
+  context 'with word "PEEL"' do
+    let(:word_to_submit) { 'PEEL' }
 
     it { is_expected.to be true }
 
@@ -21,8 +22,8 @@ describe WordValidator do
     end
   end
 
-  context 'word role (does not use centre letter)' do
-    let(:word_to_submit) { 'role' }
+  context 'word ROLE (does not use centre letter)' do
+    let(:word_to_submit) { 'ROLE' }
 
     it { is_expected.to be false }
 
@@ -31,8 +32,8 @@ describe WordValidator do
     end
   end
 
-  context 'word "prlv"' do
-    let(:word_to_submit) { 'prlv' }
+  context 'word "PRLV"' do
+    let(:word_to_submit) { 'PRLV' }
 
     it { is_expected.to be false }
 
@@ -41,8 +42,8 @@ describe WordValidator do
     end
   end
 
-  context 'word "bucket"' do
-    let(:word_to_submit) { 'bucket' }
+  context 'word "BUCKET"' do
+    let(:word_to_submit) { 'BUCKET' }
 
     it { is_expected.to be false }
 

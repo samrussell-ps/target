@@ -1,31 +1,16 @@
 class ValidWords
-  def initialize(seed_word)
-    @seed_word = seed_word
+  def initialize(board)
+    @board = board
   end
 
   def call
     # TODO optimise - select loads this all into memory
-    DictionaryEntry.select { |dictionary_entry| is_word_in_grid?(dictionary_entry.word) }
+    DictionaryEntry.select { |dictionary_entry| is_word_valid?(dictionary_entry) }
   end
 
   private
 
-  def is_word_in_grid?(word)
-    word_character_frequency(word).all? do |char, count|
-      grid_character_frequency[char] >= count
-    end
-  end
-
-  # TODO dedup
-  def grid_character_frequency
-    @seed_word.chars.each_with_object(Hash.new(0)) do |char, counts|
-      counts[char] += 1
-    end
-  end
-
-  def word_character_frequency(word)
-    word.chars.each_with_object(Hash.new(0)) do |char, counts|
-      counts[char] += 1
-    end
+  def is_word_valid?(dictionary_entry)
+    WordValidator.new(@board, dictionary_entry).call
   end
 end

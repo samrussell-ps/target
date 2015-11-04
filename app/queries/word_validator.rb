@@ -1,9 +1,9 @@
 class WordValidator
   attr_reader :errors
 
-  def initialize(board, word)
+  def initialize(board, dictionary_entry)
     @board = board
-    @word = word
+    @dictionary_entry = dictionary_entry
     @errors = []
   end
 
@@ -16,9 +16,7 @@ class WordValidator
   private
 
   def test_word
-    dictionary_entry = DictionaryEntry.find_by_word(word_to_submit)
-
-    if dictionary_entry.nil?
+    if @dictionary_entry.nil?
       errors << :word_is_not_in_dictionary
     elsif !is_word_in_grid?
       errors << :word_is_not_in_grid
@@ -28,7 +26,7 @@ class WordValidator
   end
 
   def word_to_submit
-    @word_to_submit ||= @word.to_s.upcase
+    @word_to_submit ||= @dictionary_entry.word
   end
 
   def has_word_been_submitted?
