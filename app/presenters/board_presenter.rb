@@ -4,13 +4,17 @@ class BoardPresenter
   end
 
   def grid
-    word = @board.dictionary_entry.word
-    centre_letter = word[@board.centre_letter_offset]
-    other_letters = word[0...@board.centre_letter_offset] + word[@board.centre_letter_offset+1..-1]
-    shuffled_letters = other_letters.chars.shuffle(random: Random.new(@board.word_shuffle_seed))
-    grid_letters = [shuffled_letters[0..2],
-                    [shuffled_letters[3], centre_letter, shuffled_letters[4]],
-                    shuffled_letters[5..7]
+    all_letters = @board.dictionary_entry.word.chars
+
+    centre_letter = all_letters.delete_at(@board.centre_letter_offset)
+
+    other_letters = all_letters
+
+    shuffled_other_letters = other_letters.shuffle(random: Random.new(@board.word_shuffle_seed))
+
+    grid_letters = [shuffled_other_letters[0..2],
+                    [shuffled_other_letters[3], centre_letter, shuffled_other_letters[4]],
+                    shuffled_other_letters[5..7]
     ]
   end
 
