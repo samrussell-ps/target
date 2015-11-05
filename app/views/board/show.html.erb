@@ -5,21 +5,17 @@
 <% end %>
 
 <div id="grid">
+  <% @board_presenter.grid.each do |row| %>
     <div class="leftfiller-0"></div>
-    <div class="letter-cell"><%= @board_presenter.grid[0][0] %></div>
-    <div class="letter-cell"><%= @board_presenter.grid[0][1] %></div>
-    <div class="letter-cell"><%= @board_presenter.grid[0][2] %></div>
+    <% row.each do |cell| %>
+      <% if cell.centre %>
+        <div class="letter-cell centre-letter"><%= cell.letter %></div>
+      <% else %>
+        <div class="letter-cell"><%= cell.letter %></div>
+      <% end %>
+    <% end %>
     <div class="rightfiller"></div>
-    <div class="leftfiller-0"></div>
-    <div class="letter-cell"><%= @board_presenter.grid[1][0] %></div>
-    <div class="letter-cell centre-letter"><%= @board_presenter.grid[1][1] %></div>
-    <div class="letter-cell"><%= @board_presenter.grid[1][2] %></div>
-    <div class="rightfiller"></div>
-    <div class="leftfiller-0"></div>
-    <div class="letter-cell"><%= @board_presenter.grid[2][0] %></div>
-    <div class="letter-cell"><%= @board_presenter.grid[2][1] %></div>
-    <div class="letter-cell"><%= @board_presenter.grid[2][2] %></div>
-    <div class="rightfiller"></div>
+  <% end %>
 </div>
 <div>
   <%= form_tag({controller: 'submitted_word', action: 'create', board_id: @board_presenter.id}, method: 'post', remote: false) do %>

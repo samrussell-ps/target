@@ -8,19 +8,15 @@ class BoardPresenter
   def grid
     all_letters = @board.dictionary_entry.word.chars
 
-    centre_letter = all_letters.delete_at(@board.centre_letter_offset)
+    centre_cell = Cell.new(all_letters.delete_at(@board.centre_letter_offset), true)
 
-    other_letters = all_letters
+    other_cells = all_letters.map { |x| Cell.new(x, false) }
 
-    shuffled_other_letters = other_letters.shuffle(random: Random.new(@board.word_shuffle_seed))
+    shuffled_other_cells = other_cells.shuffle(random: Random.new(@board.word_shuffle_seed))
 
-    # wtf
+    shuffled_cells = shuffled_other_cells.insert(shuffled_other_cells.length/2, centre_cell)
 
-    grid_letters = [
-      shuffled_other_letters[0..2],
-      [ shuffled_other_letters[3], centre_letter, shuffled_other_letters[4] ],
-      shuffled_other_letters[5..7]
-    ]
+    grid_letters = shuffled_cells.each_slice(3).to_a
   end
 
   def words

@@ -17,13 +17,13 @@ describe BoardPresenter do
 
       grid = board_presenter.grid
 
-      centre_letter = grid[1][1]
+      centre_cell = grid[1][1]
 
-      non_centre_letters = grid[0] + grid[2] + [grid[1][0]] + [grid[1][2]]
+      non_centre_cells = grid[0] + grid[2] + [grid[1][0]] + [grid[1][2]]
 
-      expect(centre_letter).to eq('C')
+      expect(centre_cell.letter).to eq('C')
 
-      expect(non_centre_letters.sort).to eq(%w(A B D E F G H I))
+      expect(non_centre_cells.map {|x| x.letter }.sort).to eq(%w(A B D E F G H I))
     end
   end
 
