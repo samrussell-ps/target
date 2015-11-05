@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SubmittedWordController, type: :controller do
-  let(:board) { Board.create!(dictionary_entry: DictionaryEntry.order("RANDOM()").first, word_shuffle_seed: 234, maximum_score: 1, centre_letter_offset: 1) }
+  let(:board) { Board.create!(dictionary_entry: DictionaryEntry.order("RANDOM()").first, word_shuffle_seed: 234, centre_letter_offset: 1) }
 
   describe 'PUT /board/1/submitted_word' do
     subject { response }

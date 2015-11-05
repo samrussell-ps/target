@@ -67,7 +67,7 @@ describe BoardPresenter do
     let(:maximum_score) { 5 }
 
     it 'returns the maximum score' do
-      allow(mock_board).to receive(:maximum_score).and_return(maximum_score)
+      allow(ValidWords).to receive(:new).and_return( Proc.new { [*0...maximum_score] } )
 
       expect(board_presenter.maximum_score).to eq(maximum_score)
     end

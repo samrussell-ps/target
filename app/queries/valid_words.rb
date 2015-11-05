@@ -4,12 +4,21 @@ class ValidWords
   end
 
   def call
-    DictionaryEntry.find_in_batches(batch_size: 1000).each_with_object([]) do |batch, output|
-      output.concat batch.select { |dictionary_entry| is_word_valid?(dictionary_entry) }
-    end
+    DictionaryEntry.where('sorted_letters ~ :regex', regex: grid_regex).select &method(:is_word_valid?)
   end
 
   private
+
+  def grid_regex
+    @board.dictionary_entry.word.chars.sort.each_with_object([]) do |char, array|
+      if array.size == @board.centre_letter_offset
+        array << char
+      else
+        array << "#{char}?"
+      end
+    end
+    .join
+  end
 
   def is_word_valid?(dictionary_entry)
     WordValidator.new(@board, dictionary_entry).call

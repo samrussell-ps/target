@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BoardController, type: :controller do
-  let(:board) { Board.create!(dictionary_entry: DictionaryEntry.seed_word, word_shuffle_seed: 234, maximum_score: 1, centre_letter_offset: 1) }
+  let(:board) { Board.create!(dictionary_entry: DictionaryEntry.seed_word, word_shuffle_seed: 234, centre_letter_offset: 1) }
   describe '#new' do
     it 'creates a new board' do
       expect { post :create }.to change { Board.count }.by(1)

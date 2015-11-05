@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103231409) do
+ActiveRecord::Schema.define(version: 20151105034936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,42 +21,23 @@ ActiveRecord::Schema.define(version: 20151103231409) do
     t.integer  "word_shuffle_seed"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.integer  "maximum_score"
     t.integer  "centre_letter_offset"
   end
 
   create_table "dictionary_entries", force: :cascade do |t|
     t.string   "word"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "sorted_letters"
   end
 
   add_index "dictionary_entries", ["word"], name: "index_dictionary_entries_on_word", using: :btree
-
-  create_table "games", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "word_id"
-  end
-
-  create_table "guesses", force: :cascade do |t|
-    t.string   "letter"
-    t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "submitted_words", force: :cascade do |t|
     t.integer  "dictionary_entry_id"
     t.integer  "board_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-  end
-
-  create_table "words", force: :cascade do |t|
-    t.string   "word"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

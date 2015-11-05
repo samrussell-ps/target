@@ -9,7 +9,7 @@ words_to_load = words.shuffle
 
 valid_words_to_load = words_to_load.select { |word| word.match(/\A[A-Za-z]+\z/).present? && word.size <= 9 }
 
-word_arguments = valid_words_to_load.map { |word| { word: word.upcase } }
+word_arguments = valid_words_to_load.map { |word| { word: word.upcase, sorted_letters: word.upcase.chars.sort.join } }
 
 ActiveRecord::Base.transaction do
   DictionaryEntry.destroy_all

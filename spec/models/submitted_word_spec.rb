@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SubmittedWord, type: :model do
   let(:board_dictionary_entry) { DictionaryEntry.order("RANDOM()").first }
   let(:word_shuffle_seed) { 234 }
-  let(:board) { Board.create!(dictionary_entry: board_dictionary_entry, word_shuffle_seed: word_shuffle_seed, maximum_score: 1, centre_letter_offset: 1) }
+  let(:board) { Board.create!(dictionary_entry: board_dictionary_entry, word_shuffle_seed: word_shuffle_seed, centre_letter_offset: 1) }
   let(:submitted_word_dictionary_entry) { DictionaryEntry.order("RANDOM()").first }
 
   it 'accepts with a valid board and dictionary_entry' do

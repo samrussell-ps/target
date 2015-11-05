@@ -1,4 +1,6 @@
 class BoardPresenter
+  Cell = Struct.new(:letter, :centre)
+
   def initialize(board)
     @board = board
   end
@@ -12,9 +14,12 @@ class BoardPresenter
 
     shuffled_other_letters = other_letters.shuffle(random: Random.new(@board.word_shuffle_seed))
 
-    grid_letters = [shuffled_other_letters[0..2],
-                    [shuffled_other_letters[3], centre_letter, shuffled_other_letters[4]],
-                    shuffled_other_letters[5..7]
+    # wtf
+
+    grid_letters = [
+      shuffled_other_letters[0..2],
+      [ shuffled_other_letters[3], centre_letter, shuffled_other_letters[4] ],
+      shuffled_other_letters[5..7]
     ]
   end
 
@@ -27,7 +32,7 @@ class BoardPresenter
   end
 
   def maximum_score
-    @board.maximum_score
+    ValidWords.new(@board).call.size
   end
 
   def id

@@ -6,9 +6,6 @@ class Board < ActiveRecord::Base
   validates :word_shuffle_seed, numericality: {
     only_integer: true
   }
-  validates :maximum_score, numericality: {
-    only_integer: true
-  }
   validates :centre_letter_offset, numericality: {
     only_integer: true
   }

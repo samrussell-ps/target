@@ -9,9 +9,4 @@ describe CreateBoard do
     boards = 3.times.map { CreateBoard.new.call.dictionary_entry.word.length }
     expect(boards).to eq(3.times.map { 9 })
   end
-
-  it 'sets maximum_score to the number of valid words' do
-    board = CreateBoard.new.call
-    expect(board.maximum_score).to eq(ValidWords.new(board).call.size)
-  end
 end
