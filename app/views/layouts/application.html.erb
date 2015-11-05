@@ -8,8 +8,8 @@
 </head>
 <body>
 
-        <p><%= link_to "New Board", '/board', method: :post %></p>
-        <p><%= link_to "Index", '/board', method: :get %></p>
+        <p><%= link_to "New Board", board_index_path, method: :post %></p>
+        <p><%= link_to "Index", board_index_path %></p>
 
 
 <%= yield %>

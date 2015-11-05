@@ -1,7 +1,7 @@
 class BoardController < ApplicationController
   def show
-    @board = Board.find(board_id)
-    @board_presenter = BoardPresenter.new(@board)
+    board = Board.find(board_id)
+    @board_presenter = BoardPresenter.new(board)
   end
 
   def index
