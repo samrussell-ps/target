@@ -12,9 +12,9 @@ valid_words_to_load = words_to_load.select { |word| word.match(/\A[A-Za-z]+\z/).
 word_arguments = valid_words_to_load.map { |word| { word: word.upcase, sorted_letters: word.upcase.chars.sort.join } }
 
 ActiveRecord::Base.transaction do
-  DictionaryEntry.destroy_all
+  DictionaryWord.destroy_all
 
-  DictionaryEntry.create!(word_arguments)
+  DictionaryWord.create!(word_arguments)
 end
 
 

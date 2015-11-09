@@ -1,8 +1,8 @@
 class Board < ActiveRecord::Base
-  belongs_to :dictionary_entry
+  belongs_to :dictionary_word
   has_many :submitted_words, dependent: :destroy
 
-  validates :dictionary_entry, presence: true
+  validates :dictionary_word, presence: true
   validates :word_shuffle_seed, numericality: {
     only_integer: true
   }

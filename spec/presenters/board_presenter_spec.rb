@@ -4,16 +4,16 @@ describe BoardPresenter do
   let(:seed_word) { "ABCDEFGHI" }
   let(:word_shuffle_seed) { 234 }
   let(:centre_letter_offset) { seed_word.index('C') }
-  let(:mock_dictionary_entry) { instance_double("DictionaryEntry") }
+  let(:mock_dictionary_word) { instance_double("DictionaryWord") }
   let(:mock_board) { instance_double("Board") }
   let(:board_presenter) { BoardPresenter.new(mock_board) }
 
   describe '#grid' do
     it 'shuffles the word and puts the centre letter in the centre' do
-      allow(mock_board).to receive(:dictionary_entry).and_return(mock_dictionary_entry)
+      allow(mock_board).to receive(:dictionary_word).and_return(mock_dictionary_word)
       allow(mock_board).to receive(:centre_letter_offset).and_return(centre_letter_offset)
       allow(mock_board).to receive(:word_shuffle_seed).and_return(word_shuffle_seed)
-      allow(mock_dictionary_entry).to receive(:word).and_return(seed_word)
+      allow(mock_dictionary_word).to receive(:word).and_return(seed_word)
 
       grid = board_presenter.grid
 
@@ -32,7 +32,7 @@ describe BoardPresenter do
     let(:submitted_words) {
       words.map do |word|
         submitted_word = instance_double("SubmittedWord")
-        allow(submitted_word).to receive(:dictionary_entry).and_return(DictionaryEntry.find_by_word(word))
+        allow(submitted_word).to receive(:dictionary_word).and_return(DictionaryWord.find_by_word(word))
 
         submitted_word
       end
@@ -50,7 +50,7 @@ describe BoardPresenter do
     let(:submitted_words) {
       words.map do |word|
         submitted_word = instance_double("SubmittedWord")
-        allow(submitted_word).to receive(:dictionary_entry).and_return(DictionaryEntry.find_by_word(word))
+        allow(submitted_word).to receive(:dictionary_word).and_return(DictionaryWord.find_by_word(word))
 
         submitted_word
       end

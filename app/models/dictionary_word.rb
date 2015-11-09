@@ -1,4 +1,4 @@
-class DictionaryEntry < ActiveRecord::Base
+class DictionaryWord< ActiveRecord::Base
   has_many :boards
   has_many :submitted_words
 

@@ -26,22 +26,22 @@ class SubmitWord
     @word_to_submit ||= @word.to_s.upcase
   end
 
-  def dictionary_entry
-    @dictionary_entry ||= DictionaryEntry.find_by_word(word_to_submit)
+  def dictionary_word
+    @dictionary_word ||= DictionaryWord.find_by_word(word_to_submit)
   end
 
   def word_validator
-    @word_validator ||= WordValidator.new(@board, dictionary_entry)
+    @word_validator ||= WordValidator.new(@board, dictionary_word)
   end
 
   def submit_word
     find_errors
 
-    @board.submitted_words.create!(dictionary_entry: dictionary_entry) if @errors.empty? # TODO valid instead of find_errors (it's okay that this mutates state)
+    @board.submitted_words.create!(dictionary_word: dictionary_word) if @errors.empty? # TODO valid instead of find_errors (it's okay that this mutates state)
   end
 
   def find_errors
-    if dictionary_entry.nil?
+    if dictionary_word.nil?
       error(:word_is_not_in_dictionary)
     elsif is_word_invalid?
       word_validator.errors.each &method(:error)
@@ -57,8 +57,8 @@ class SubmitWord
   end
 
   def has_word_been_submitted?
-    # TODO @board.submitted_words.includes(:dictionary_entry).any? ... = one db query instead of N
-    @board.submitted_words.any? { |submitted_word| submitted_word.dictionary_entry.word == word_to_submit }
+    # TODO @board.submitted_words.includes(:dictionary_word).any? ... = one db query instead of N
+    @board.submitted_words.any? { |submitted_word| submitted_word.dictionary_word.word == word_to_submit }
   end
 
   def error(symbol)

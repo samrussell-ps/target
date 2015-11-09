@@ -6,7 +6,7 @@ describe CreateBoard do
   end
 
   it 'only creates boards with 9 letter words' do
-    boards = 3.times.map { CreateBoard.new.call.dictionary_entry.word.length }
+    boards = 3.times.map { CreateBoard.new.call.dictionary_word.word.length }
     expect(boards).to eq(3.times.map { 9 })
   end
 end

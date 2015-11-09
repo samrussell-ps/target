@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe WordValidator do
-  let(:dictionary_entry) { DictionaryEntry.find_by_word!("DEVELOPER") }
-  let(:params) { { dictionary_entry: dictionary_entry,
+  let(:dictionary_word) { DictionaryWord.find_by_word!("DEVELOPER") }
+  let(:params) { { dictionary_word: dictionary_word,
                    word_shuffle_seed: 234,
                    centre_letter_offset: 6} }
   let(:board) { Board.create!(params) }
   let(:word_to_submit) { nil }
-  let(:dictionary_entry_to_submit) { DictionaryEntry.find_by_word(word_to_submit) }
-  let(:word_validator) { WordValidator.new(board, dictionary_entry_to_submit) }
+  let(:dictionary_word_to_submit) { DictionaryWord.find_by_word(word_to_submit) }
+  let(:word_validator) { WordValidator.new(board, dictionary_word_to_submit) }
   subject(:call) { word_validator.call }
 
   context 'with word "PEEL"' do

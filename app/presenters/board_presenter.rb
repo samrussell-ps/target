@@ -6,7 +6,7 @@ class BoardPresenter
   end
 
   def grid
-    all_letters = @board.dictionary_entry.word.chars
+    all_letters = @board.dictionary_word.word.chars
 
     centre_cell = Cell.new(all_letters.delete_at(@board.centre_letter_offset), true)
 
@@ -20,7 +20,7 @@ class BoardPresenter
   end
 
   def words
-    @board.submitted_words.map { |submitted_word| submitted_word.dictionary_entry.word }
+    @board.submitted_words.map { |submitted_word| submitted_word.dictionary_word.word }
   end
 
   def score
