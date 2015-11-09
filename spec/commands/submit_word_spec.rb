@@ -53,8 +53,8 @@ RSpec.describe SubmitWord do
         expect { submit_word.call }.to_not change { board.submitted_words.size }
       end
 
-      it 'sets "word does not use centre letter" error' do
-        expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_does_not_use_centre_letter]])
+      it 'sets "word is not in grid"' do
+        expect { submit_word.call }.to change { submit_word.errors }.by([SubmitWord::ERROR_MESSAGES[:word_is_not_in_grid]])
       end
     end
 

@@ -30,10 +30,6 @@ class SubmitWord
     @dictionary_word ||= DictionaryWord.find_by_word(word_to_submit)
   end
 
-  def word_validator
-    @word_validator ||= WordValidator.new(@board, dictionary_word)
-  end
-
   def submit_word
     @board.submitted_words.create!(dictionary_word: dictionary_word) if valid?
   end
@@ -41,8 +37,8 @@ class SubmitWord
   def valid?
     if dictionary_word.nil?
       error(:word_is_not_in_dictionary)
-    elsif is_word_invalid?
-      word_validator.errors.each &method(:error)
+    elsif is_word_not_in_grid?
+      error(:word_is_not_in_grid)
     elsif has_word_been_submitted?
       error(:word_has_been_submitted)
     end
@@ -50,8 +46,8 @@ class SubmitWord
     return @errors.empty?
   end
 
-  def is_word_invalid?
-    word_validator.call == false
+  def is_word_not_in_grid?
+    ValidWords.new(@board).call.exclude?(dictionary_word)
   end
 
   def has_word_been_submitted?
