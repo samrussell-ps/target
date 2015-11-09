@@ -42,7 +42,7 @@ RSpec.describe Board, type: :model do
 
     expect(Board.create(dictionary_word: DictionaryWord.find_by_word!("DEVELOPER"),
             word_shuffle_seed: 234,
-            centre_letter_offset: 'pizza')).to_not be_valid
+            centre_letter_offset: nil)).to_not be_valid
   end
 
   it 'destroys submitted_words when the model is destroyed' do
