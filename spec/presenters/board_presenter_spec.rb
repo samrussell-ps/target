@@ -8,18 +8,18 @@ describe BoardPresenter do
   let(:mock_board) { instance_double("Board") }
   let(:board_presenter) { BoardPresenter.new(mock_board) }
 
-  describe '#grid' do
+  describe '#rows' do
     it 'shuffles the word and puts the centre letter in the centre' do
       allow(mock_board).to receive(:dictionary_word).and_return(mock_dictionary_word)
       allow(mock_board).to receive(:centre_letter_offset).and_return(centre_letter_offset)
       allow(mock_board).to receive(:word_shuffle_seed).and_return(word_shuffle_seed)
       allow(mock_dictionary_word).to receive(:word).and_return(seed_word)
 
-      grid = board_presenter.grid
+      rows = board_presenter.rows
 
-      centre_cell = grid[1][1]
+      centre_cell = rows[1][1]
 
-      non_centre_cells = grid[0] + grid[2] + [grid[1][0]] + [grid[1][2]]
+      non_centre_cells = rows[0] + rows[2] + [rows[1][0]] + [rows[1][2]]
 
       expect(centre_cell.letter).to eq('C')
 

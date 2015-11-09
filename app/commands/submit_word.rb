@@ -37,17 +37,17 @@ class SubmitWord
   def valid?
     if dictionary_word.nil?
       error(:word_is_not_in_dictionary)
-    elsif is_word_not_in_grid?
+    elsif !is_word_in_grid?
       error(:word_is_not_in_grid)
     elsif has_word_been_submitted?
       error(:word_has_been_submitted)
     end
 
-    return @errors.empty?
+    @errors.empty?
   end
 
-  def is_word_not_in_grid?
-    ValidWords.new(@board).call.exclude?(dictionary_word)
+  def is_word_in_grid?
+    ValidWords.new(@board).call.include?(dictionary_word)
   end
 
   def has_word_been_submitted?

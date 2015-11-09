@@ -10,14 +10,12 @@ class ValidWords
   private
 
   def grid_regex
-    @board.dictionary_word.word.chars.each_with_object([]) do |char, array|
-      if array.size == @board.centre_letter_offset
-        array << char
-      else
-        array << "#{char}?"
-      end
-    end
-    .sort
-    .join
+    @board.dictionary_word.word.chars.map.with_index do |char, offset|
+      if offset == @board.centre_letter_offset
+       char
+     else
+       "#{char}?"
+     end
+    end.sort.join
   end
 end

@@ -5,21 +5,17 @@
 <% end %>
 
 <div id="grid">
-  <% @board_presenter.grid.each do |row| %>
+  <% @board_presenter.rows.each do |row| %>
     <div class="leftfiller-0"></div>
     <% row.each do |cell| %>
-      <% if cell.centre %>
-        <div class="letter-cell centre-letter"><%= cell.letter %></div>
-      <% else %>
-        <div class="letter-cell"><%= cell.letter %></div>
-      <% end %>
+      <div class="letter-cell <%= "centre-letter" if cell.centre %>"><%= cell.letter %></div>
     <% end %>
     <div class="rightfiller"></div>
   <% end %>
 </div>
 <div>
-  <%= form_tag({controller: 'submitted_word', action: 'create', board_id: @board_presenter.id}, method: 'post', remote: false) do %>
-    <%= text_field_tag 'word', '', { autofocus: true } %>
+  <%= form_tag(board_submitted_word_index_path(board_id: @board_presenter.id), method: 'post') do %>
+    <%= text_field_tag 'word', '', { autofocus: true, required: true, placeholder: "Enter word" } %>
     <%= submit_tag 'Submit word' %>
   <% end %>
 </div>

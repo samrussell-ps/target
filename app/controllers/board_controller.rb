@@ -9,9 +9,7 @@ class BoardController < ApplicationController
   end
 
   def create
-    new_board = CreateBoard.new.call
-
-    redirect_to new_board
+    redirect_to CreateBoard.new.call
   end
 
   private

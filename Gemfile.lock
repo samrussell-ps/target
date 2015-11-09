@@ -223,7 +223,6 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   codeclimate-test-reporter
-  coffee-rails (~> 4.1.0)
   guard-rspec
   jbuilder (~> 2.0)
   jquery-rails
