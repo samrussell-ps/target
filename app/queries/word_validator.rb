@@ -29,10 +29,6 @@ class WordValidator
     @word_to_submit ||= @dictionary_word.word
   end
 
-  def has_word_been_submitted?
-    @board.submitted_words.map { |submitted_word| submitted_word.dictionary_word }.include?(@dictionary_word)
-  end
-
   def word_does_not_use_centre_letter?
     centre_letter = @board.dictionary_word.word[@board.centre_letter_offset]
 
